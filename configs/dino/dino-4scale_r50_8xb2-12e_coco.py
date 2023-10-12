@@ -59,7 +59,7 @@ model = dict(
         temperature=20),  # 10000 for DeformDETR
     bbox_head=dict(
         type='DINOHead',
-        num_classes=80,
+        num_classes=11,
         sync_cls_avg_factor=True,
         loss_cls=dict(
             type='FocalLoss',
@@ -97,18 +97,18 @@ train_pipeline = [
             [
                 dict(
                     type='RandomChoiceResize',
-                    scales=[(1280, 1280), (800, 800), (1024, 1024)],
+                    scales=[(640, 640), (800, 800), (720, 720)],
                     keep_ratio=True)
             ],
             [
                 dict(
                     type='RandomCrop',
                     crop_type='absolute_range',
-                    crop_size=(600, 1024),
+                    crop_size=(400, 720),
                     allow_negative_crop=True),
                 dict(
                     type='RandomChoiceResize',
-                    scales=[(1280, 1280), (800, 800), (1024, 1024)],
+                    scales=[(640, 640), (800, 800), (720, 720)],
                     keep_ratio=True)
             ]
         ]),

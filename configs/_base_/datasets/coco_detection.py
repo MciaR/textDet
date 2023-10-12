@@ -1,6 +1,7 @@
 # dataset settings
 dataset_type = 'CocoDataset'
 data_root = 'data/'
+classes = ('Text', 'Title', 'Header', 'Footer', 'Figure', 'Table', 'Toc', 'Figure caption', 'Table caption', 'Equation', 'Footnote')
 
 # Example to use different file client
 # Method 1: simply set the data root and let the file I/O module
@@ -43,6 +44,7 @@ train_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         data_root=data_root,
+        metainfo=dict(classes=classes), # customize our dataset's category, must be mapping to train.json's `categories`
         ann_file='trainset/train.json',
         data_prefix=dict(img='trainset/train/'),
         filter_cfg=dict(filter_empty_gt=True, min_size=32),
@@ -57,6 +59,7 @@ val_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         data_root=data_root,
+        metainfo=dict(classes=classes),
         ann_file='valset/val.json',
         data_prefix=dict(img='valset/val/'),
         test_mode=True,
