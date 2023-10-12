@@ -111,7 +111,7 @@ train_file["images"] = train_images
 train_file["categories"] = train_categories
 
 with open(os.path.join(TARGET_TRAIN_PATH, "train.json"), "w") as f:
-    f.write(json.dumps(val_file))
+    f.write(json.dumps(train_file))
 
 if os.path.exists(os.path.join(TARGET_TRAIN_PATH, "train")) and os.path.exists(os.path.join(TARGET_TRAIN_PATH, "train.json")):
     print("Create Val Dataset Successfully!")
