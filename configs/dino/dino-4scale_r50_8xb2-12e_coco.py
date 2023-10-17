@@ -97,18 +97,18 @@ train_pipeline = [
             [
                 dict(
                     type='RandomChoiceResize',
-                    scales=[(640, 640), (800, 800), (720, 720)],
+                    scales=[(1280, 1280), (1472, 1472), (1344, 1344)],
                     keep_ratio=True)
             ],
             [
                 dict(
                     type='RandomCrop',
-                    crop_type='absolute_range',
-                    crop_size=(400, 720),
+                    crop_type='relative_range',
+                    crop_size=(0.1, 1), #h, w
                     allow_negative_crop=True),
                 dict(
                     type='RandomChoiceResize',
-                    scales=[(640, 640), (800, 800), (720, 720)],
+                    scales=[(1280, 1280), (1472, 1472), (1344, 1344)],
                     keep_ratio=True)
             ]
         ]),
@@ -130,7 +130,7 @@ optim_wrapper = dict(
 )  # custom_keys contains sampling_offsets and reference_points in DeformDETR  # noqa
 
 # learning policy
-max_epochs = 12
+max_epochs = 18
 train_cfg = dict(
     type='EpochBasedTrainLoop', max_epochs=max_epochs, val_interval=1)
 
@@ -143,7 +143,7 @@ param_scheduler = [
         begin=0,
         end=max_epochs,
         by_epoch=True,
-        milestones=[11],
+        milestones=[16],
         gamma=0.1)
 ]
 

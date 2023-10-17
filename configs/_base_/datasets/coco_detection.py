@@ -36,7 +36,7 @@ test_pipeline = [
                    'scale_factor'))
 ]
 train_dataloader = dict(
-    batch_size=2,
+    batch_size=1,
     num_workers=2, # must be 0 and persistent_workers=False for windows, 
     persistent_workers=True,
     sampler=dict(type='DefaultSampler', shuffle=True),
@@ -71,6 +71,7 @@ val_evaluator = dict(
     type='CocoMetric',
     ann_file=data_root + 'valset/val.json',
     metric='bbox',
+    classwise=True,
     format_only=False,
     backend_args=backend_args)
 test_evaluator = val_evaluator
