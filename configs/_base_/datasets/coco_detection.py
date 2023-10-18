@@ -87,13 +87,14 @@ test_dataloader = dict(
     dataset=dict(
         type=dataset_type,
         data_root=data_root,
+        metainfo=dict(classes=classes),
         ann_file='testset/pred.json',
-        data_prefix=dict(img='testset/test/'),
+        data_prefix=dict(img='testset/val/'),
         test_mode=True,
         pipeline=test_pipeline))
 test_evaluator = dict(
     type='CocoMetric',
     metric='bbox',
     format_only=True,
-    ann_file='testset/pred.json',
+    ann_file=data_root + 'testset/pred.json',
     outfile_prefix='./work_dirs/coco_detection/test')
